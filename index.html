@@ -34,7 +34,6 @@
             --text-main: #111111;
             --text-muted: #555555;
             --primary-red: #D92323; 
-            --accent-orange: #FF7B00; 
             --grid-color: rgba(0, 0, 0, 0.04);
         }
 
@@ -65,8 +64,22 @@
             color: var(--primary-red);
             font-weight: 700;
             margin-bottom: 20px;
-            border-bottom: 2px solid var(--accent-orange);
+            border-bottom: 2px solid var(--text-main); /* POPRAWKA 1: Czarne podkreślenie */
             padding-bottom: 5px;
+        }
+        
+        .about-title h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .about-title .degree {
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
 
         /* NAWIGACJA */
@@ -153,6 +166,7 @@
             margin-top: 40px;
         }
         .about-title {
+            margin-top: 160px;
             flex: 1;
             border-left: 4px solid var(--primary-red);
             padding-left: 30px;
@@ -165,7 +179,7 @@
             letter-spacing: -0.5px;
         }
         .about-title p {
-            color: var(--accent-orange);
+            color: var(--primary-red);
             font-weight: 700;
             font-size: 0.9rem;
         }
@@ -190,15 +204,15 @@
             margin-top: 50px;
         }
         .service-card {
-            border-left: 4px solid var(--accent-orange);
+            border-left: 4px solid var(--primary-red); /* POPRAWKA 2: Czerwone kreseczki */
             padding: 30px;
             background: #fff;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
         }
         .service-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border-left-color: var(--primary-red);
+            border-left-color: var(--text-main);
         }
         .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
 
@@ -211,7 +225,7 @@
         .project-info { padding: 30px; }
         .project-info h3 { font-size: 1.4rem; margin-bottom: 10px; }
         .project-info p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; }
-        .project-services { font-size: 0.85rem; font-weight: 600; color: var(--accent-orange); }
+        .project-services { font-size: 0.85rem; font-weight: 600; color: var(--primary-red); }
 
         /* SEKCJA REFERENCJE (Robocza - Slider) */
         .testimonials { padding: 100px 5%; background-color: var(--bg-color); border-bottom: 1px solid #eaeaea; }
@@ -245,7 +259,7 @@
         .contact-content { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
         .contact-item { font-size: 2.5rem; font-weight: 600; }
         .contact-item a { color: #fff; text-decoration: none; transition: color 0.3s ease; }
-        .contact-item a:hover { color: var(--accent-orange); }
+        .contact-item a:hover { color: var(--primary-red); }
         .footer-note {
             margin-top: 80px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;
             color: #888; font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between;
@@ -282,8 +296,8 @@
         <nav>
             <a href="#o-mnie" class="mono">O mnie</a>
             <a href="#uslugi" class="mono">Zakres Usług</a>
-            <a href="#realizacje" class="mono">Realizacje</a>
-            <a href="#referencje" class="mono">Referencje</a>
+            <!-- <a href="#realizacje" class="mono">Realizacje</a> -->
+            <!-- <a href="#referencje" class="mono">Referencje</a> -->
             <a href="#uprawnienia" class="mono">Uprawnienia</a>
             <a href="#kontakt" class="mono">Kontakt</a>
         </nav>
@@ -296,8 +310,8 @@
                 <p class="mono" id="seo-name" style="color: var(--text-muted);">RZECZOZNAWCA PPOŻ</p>
                 <h1>Bezpieczeństwo oparte na <span>wiedzy</span> i rygorze inżynierskim.</h1>
                 <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px;">
-                    Autoryzowany rzeczoznawca do spraw zabezpieczeń przeciwpożarowych. 
-                    Dostarczam profesjonalne opinie, audyty i projekty z gwarancją zgodności z przepisami.
+                    Rzeczoznawca do spraw zabezpieczeń przeciwpożarowych. 
+                    Opracowuje kompleksową dokumentację bezpieczeństwa pożarowego.
                 </p>
             </div>
             
@@ -316,8 +330,8 @@
             <h2 class="mono section-label">01 // O MNIE</h2>
             <div class="about-grid">
                 <div class="about-title">
-                    <h3>mgr inż. bezpieczeństwa pożarowego</h3>
-                    <h3> Sebastian Falicki</h3>
+                    <h3>Sebastian Falicki</h3>
+                    <h3 class="degree">mgr inż. bezpieczeństwa pożarowego</h3>
                     <p class="mono">rzeczoznawca ds. zabezpieczeń przeciwpożarowych</p>
                 </div>
                 <div class="about-text">
@@ -333,11 +347,11 @@
             <div class="services-grid">
                 <div class="service-card">
                     <h3>Ekspertyzy techniczne</h3>
-                    <p>Analizuję stan ochrony przeciwpożarowej istniejących lub projektowanych obiektów i wskazuję rozwiązania pozwalające spełnić wymagania bezpieczeństwa pożarowego. Ekspertyzy przygotowuję m.in. w sytuacjach wymagających zastosowania rozwiązań innych niż standardowe lub dostosowania istniejącego obiektu do aktualnych wymagań.</p>
+                    <p>Analizuję stan ochrony przeciwpożarowej istniejących lub projektowanych obiektów i&nbsp;wskazuję rozwiązania pozwalające spełnić wymagania bezpieczeństwa pożarowego. Ekspertyzy przygotowuję m.in. w sytuacjach wymagających zastosowania rozwiązań innych niż standardowe lub dostosowania istniejącego obiektu do aktualnych wymagań.</p>
                 </div>
                 <div class="service-card">
                     <h3>Uzgodnienia projektowe</h3>
-                    <p>Weryfikuję dokumentację projektową pod kątem wymagań ochrony przeciwpożarowej i uzgadniam przyjęte rozwiązania. Zwracam uwagę nie tylko na zgodność z przepisami, ale również na możliwość ich prawidłowej realizacji na dalszych etapach inwestycji.</p>
+                    <p>Weryfikuję dokumentację projektową pod kątem wymagań ochrony przeciwpożarowej i&nbsp; uzgadniam przyjęte rozwiązania. Zwracam uwagę nie tylko na zgodność z&nbsp;przepisami, ale również na możliwość ich prawidłowej realizacji na dalszych etapach inwestycji.</p>
                 </div>
                 <div class="service-card">
                     <h3>Instrukcje bezpieczeństwa pożarowego</h3>
@@ -345,27 +359,27 @@
                 </div>
                 <div class="service-card">
                     <h3>Scenariusze pożarowe</h3>
-                    <p>Opracowuję scenariusze określające sposób działania urządzeń i instalacji przeciwpożarowych w przypadku wystąpienia pożaru. Uwzględniam wzajemną współpracę systemów, tak aby przyjęte rozwiązania były spójne z projektem i rzeczywistymi warunkami funkcjonowania obiektu.</p>
+                    <p>Opracowuję scenariusze określające sposób działania urządzeń i&nbsp;instalacji przeciwpożarowych w przypadku wystąpienia pożaru. Uwzględniam wzajemną współpracę systemów, tak aby przyjęte rozwiązania były spójne z&nbsp;projektem i&nbsp;rzeczywistymi warunkami funkcjonowania obiektu.</p>
                 </div>
                 <div class="service-card">
                     <h3>Operaty przeciwpożarowe</h3>
-                    <p>Przygotowuję operaty określające wymagania ochrony przeciwpożarowej związane z magazynowaniem, zbieraniem lub przetwarzaniem odpadów. Analizuję charakter prowadzonej działalności oraz występujące zagrożenia, a następnie określam wymagane rozwiązania i warunki bezpiecznego prowadzenia działalności.</p>
+                    <p>Przygotowuję operaty określające wymagania ochrony przeciwpożarowej związane z&nbsp; magazynowaniem, zbieraniem lub przetwarzaniem odpadów. Analizuję charakter prowadzonej działalności oraz występujące zagrożenia, a&nbsp;następnie określam wymagane rozwiązania i&nbsp;warunki bezpiecznego prowadzenia działalności.</p>
                 </div>
                 <div class="service-card">
                     <h3>Dokumentacja ATEX</h3>
-                    <p>Przygotowuję dokumentację dotyczącą zagrożeń związanych z możliwością wystąpienia atmosfer wybuchowych. Analizuję procesy, stosowane substancje i warunki pracy, pomagając określić strefy zagrożenia oraz wymagane środki ograniczające ryzyko wybuchu.</p>
+                    <p>Przygotowuję dokumentację dotyczącą zagrożeń związanych z&nbsp;możliwością wystąpienia atmosfer wybuchowych. Analizuję procesy, stosowane substancje i&nbsp;warunki pracy, pomagając określić strefy zagrożenia oraz wymagane środki ograniczające ryzyko wybuchu.</p>
                 </div>
                 <div class="service-card">
                     <h3>Audyty i opinie pożarowe</h3>
-                    <p>Sprawdzam stan ochrony przeciwpożarowej obiektu, wskazując niezgodności, potencjalne zagrożenia oraz obszary wymagające poprawy. W zależności od potrzeb przygotowuję opinię lub bardziej szczegółowy audyt wraz z praktycznymi zaleceniami dotyczącymi dalszego postępowania.</p>
+                    <p>Sprawdzam stan ochrony przeciwpożarowej obiektu, wskazując niezgodności, potencjalne zagrożenia oraz obszary wymagające poprawy. W&nbsp;zależności od potrzeb przygotowuję opinię lub bardziej szczegółowy audyt wraz z praktycznymi zaleceniami dotyczącymi dalszego postępowania.</p>
                 </div>
                 <div class="service-card">
                     <h3>Przygotowanie obiektów do odbioru</h3>
-                    <p>Pomagam Inwestorom przygotować obiekt do odbioru pod względem wymagań ochrony przeciwpożarowej. Weryfikuję dokumentację, zastosowane zabezpieczenia oraz zgodność wykonanych rozwiązań z projektem, aby możliwie wcześnie wykryć elementy wymagające uzupełnienia lub poprawy.</p>
+                    <p>Pomagam Inwestorom przygotować obiekt do odbioru pod względem wymagań ochrony przeciwpożarowej. Weryfikuję dokumentację, zastosowane zabezpieczenia oraz zgodność wykonanych rozwiązań z&nbsp;projektem, aby możliwie wcześnie wykryć elementy wymagające uzupełnienia lub poprawy.</p>
                 </div>
                 <div class="service-card">
                     <h3>Nadzór ppoż. nad inwestycjami</h3>
-                    <p>Wspieram Inwestora podczas realizacji inwestycji, kontrolując wykonanie rozwiązań związanych z ochroną przeciwpożarową. Bieżąca konsultacja pozwala reagować na problemy jeszcze w trakcie budowy i ograniczyć ryzyko kosztownych zmian przed odbiorem obiektu.</p>
+                    <p>Wspieram Inwestora podczas realizacji inwestycji, kontrolując wykonanie rozwiązań związanych z&nbsp;ochroną przeciwpożarową. Bieżąca konsultacja pozwala reagować na problemy jeszcze w&nbsp;trakcie budowy i&nbsp;ograniczyć ryzyko kosztownych zmian przed odbiorem obiektu.</p>
                 </div>
             </div>
         </section>
@@ -375,14 +389,14 @@
         =========================================== -->
         
         <!-- SEKCJA REALIZACJE -->
-        
+        <!-- 
         <section id="realizacje" class="projects">
             <h2 class="mono section-label">[XX] // WYKONANE REALIZACJE</h2>
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-image mono">[ZDJĘCIE BUDYNKU 1]</div>
                     <div class="project-info">
-                        <h3>Biurowiec "Zahir Kebab"</h3>
+                        <h3>Biurowiec "Omega Tower"</h3>
                         <p>Kompleksowy audyt budynku wysokościowego wraz z aktualizacją instrukcji bezpieczeństwa pożarowego dla obiektu o powierzchni 15 000 m2.</p>
                         <div class="project-services">USŁUGI: Audyt, Instrukcja Bezpieczeństwa</div>
                     </div>
@@ -390,7 +404,7 @@
                 <div class="project-card">
                     <div class="project-image mono">[ZDJĘCIE BUDYNKU 2]</div>
                     <div class="project-info">
-                        <h3>Bazylika w Sarnakach</h3>
+                        <h3>Hala magazynowa "Logis"</h3>
                         <p>Opracowanie scenariusza pożarowego oraz matrycy sterowań urządzeń PPOŻ dla wielkopowierzchniowego centrum logistycznego.</p>
                         <div class="project-services">USŁUGI: Scenariusz pożarowy, Doradztwo</div>
                     </div>
@@ -398,17 +412,17 @@
                 <div class="project-card">
                     <div class="project-image mono">[ZDJĘCIE BUDYNKU 3]</div>
                     <div class="project-info">
-                        <h3>Posąg Jezusa w Rio de Janeiro</h3>
+                        <h3>Galeria Handlowa "Centrum"</h3>
                         <p>Uzgodnienie projektu przebudowy układu drogowego i dróg pożarowych wraz z opinią techniczną dotyczącą warunków ewakuacji.</p>
                         <div class="project-services">USŁUGI: Uzgodnienia projektowe, Opinia</div>
                     </div>
                 </div>
             </div>
         </section>
-        
+        -->
 
         <!-- SEKCJA REFERENCJE (SLIDER) -->
-        
+        <!--
         <section id="referencje" class="testimonials">
             <h2 class="mono section-label">[YY] // REFERENCJE OD KLIENTÓW</h2>
             <div class="slider-container">
@@ -433,7 +447,6 @@
             </div>
             
             <script>
-                // PROSTY SKRYPT SLIDERA (Działa po odkomentowaniu)
                 let currentSlide = 0;
                 function moveSlide(direction) {
                     const track = document.getElementById('sliderTrack');
@@ -445,14 +458,12 @@
                 }
             </script>
         </section>
-       
+        -->
 
         <!-- SKAN UPRAWNIEŃ -->
         <section id="uprawnienia" class="credentials">
             <h2 class="mono section-label">03 // UPRAWNIENIA ZAWODOWE</h2>
-            <p style="max-width: 600px; color: var(--text-muted);">
-                Działam na podstawie uprawnień państwowych. Poniżej znajduje się oficjalny dokument poświadczający moje kwalifikacje zawodowe jako rzeczoznawcy ds. zabezpieczeń przeciwpożarowych.
-            </p>
+
 
             <div class="scan-container">
                 <div class="scan-placeholder mono">
