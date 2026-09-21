@@ -153,6 +153,29 @@
             object-fit: contain;
         }
 
+        .hero-logo-card {
+            background: #ffffff;
+            padding: 16px; /* Lekko zwiększony margines wewnętrzny, aby logo miało estetyczny odstęp */
+            border: 1px solid #dcdcdc;
+            border-bottom: 5px solid var(--primary-red); /* Mocniejszy akcent kolorystyczny na dole */
+            
+            /* GŁĘBOKI, MOCNY CIEŃ */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.22), 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 480px; /* Zwiększono limit szerokości z 480px do 580px */
+        }
+
+        .hero-logo-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
         /* SEKCJA O MNIE */
         .about {
             padding: 100px 5%;
@@ -386,8 +409,8 @@
                     [MIEJSCE NA LOGO / GRAFIKĘ]
                 </div>
             </div> -->
-            <div class="hero-logo-container">
-                <img src="LOGO FIRMY 4K.png" alt="SEFA SAFETY Sebastian Falicki - Rzeczoznawca PPOŻ" class="hero-logo">
+            <div class="hero-logo-card">
+                <img src="LOGO FIRMY 4K.png" alt="SEFA SAFETY Sebastian Falicki - Rzeczoznawca PPOŻ" class="hero-logo-img">
             </div>
         </section>
 
