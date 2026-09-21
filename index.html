@@ -265,6 +265,72 @@
             color: #888; font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between;
         }
 
+        /* PRIVACY POPUP - RWD */
+        .privacy-popup {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--text-main, #111111);
+            color: #ffffff;
+            padding: 20px 5%;
+            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none; /* Domyślnie ukryty, aktywowany przez JS */
+            border-top: 3px solid var(--primary-red, #D92323);
+        }
+
+        .privacy-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .privacy-text {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #cccccc;
+            margin: 0;
+        }
+
+        .privacy-text strong {
+            color: #ffffff;
+        }
+
+        .privacy-btn {
+            background-color: var(--primary-red, #D92323);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .privacy-btn:hover {
+            background-color: #b51c1c;
+        }
+
+        /* Responsywność dla urządzeniach mobilnych */
+        @media (max-width: 768px) {
+            .privacy-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+                text-align: left;
+            }
+
+            .privacy-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
         /* RWD */
         @media (max-width: 992px) {
             .hero { flex-direction: column; text-align: left; padding-top: 140px; gap: 40px; }
@@ -496,6 +562,15 @@
         </section>
     </main>
 
+    <!-- BANER RODO / PRIVACY POPUP -->
+    <div id="privacy-popup" class="privacy-popup">
+        <div class="privacy-content">
+            <p class="privacy-text">
+                <strong>Dbamy o Twoją prywatność.</strong> Strona wykorzystuje podstawowe pliki cookies oraz przetwarza dane techniczne (np. adres IP) wyłącznie w celu zapewnienia prawidłowego działania serwisu i obsługi zapytań. Administratorem danych jest [IMIĘ I NAZWISKO / NAZWA FIRMY]. Masz prawo do wglądu i żądania usunięcia swoich danych.
+            </p>
+            <button id="privacy-btn" class="privacy-btn mono">Przeczytałem i rozumiem</button>
+        </div>
+    </div>
     <!-- ==========================================
          SEO: DANE STRUKTURALNE (JSON-LD)
     =========================================== -->
@@ -518,6 +593,24 @@
       },
       "description": "Autoryzowany rzeczoznawca do spraw zabezpieczeń przeciwpożarowych."
     }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const popup = document.getElementById('privacy-popup');
+            const btn = document.getElementById('privacy-btn');
+
+            // Sprawdzanie czy użytkownik już potwierdził zapoznanie się z informacją
+            if (!localStorage.getItem('privacyAccepted')) {
+                popup.style.display = 'block';
+            }
+
+            // Zapisanie wyboru po kliknięciu przycisku
+            btn.addEventListener('click', function () {
+                localStorage.setItem('privacyAccepted', 'true');
+                popup.style.display = 'none';
+            });
+        });
     </script>
 </body>
 </html>
