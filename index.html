@@ -18,7 +18,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://twojadomena.pl/">
     <meta property="og:title" content="SEFA SAFETY - Sebastian Falicki - Rzeczoznawca PPOŻ">
-    <meta property="og:description" content="Autoryzowany rzeczoznawca do spraw zabezpieczeń przeciwpożarowych. Opracowuję opinie, audyty i projekty z gwarancją zgodności z przepisami.">
+    <meta property="og:description" content="Rzeczoznawca do spraw zabezpieczeń przeciwpożarowych. Opracowuję opinie, audyty i projekty z gwarancją zgodności z przepisami.">
     <meta property="og:image" content="https://twojadomena.pl/og-image.jpg">
     
     <link rel="icon" type="image/png" href="favicon.png">
@@ -64,7 +64,7 @@
             color: var(--primary-red);
             font-weight: 700;
             margin-bottom: 20px;
-            border-bottom: 2px solid var(--text-main); /* POPRAWKA 1: Czarne podkreślenie */
+            border-bottom: 2px solid var(--text-main);
             padding-bottom: 5px;
         }
         
@@ -262,11 +262,11 @@
         .slider-controls button:hover { background: var(--text-main); color: #fff; }
 
         /* SEKCJA UPRAWNIENIA (SKAN) */
-        .credentials { padding: 100px 5%; background-color: #fff; }
-        .scan-container {
-            max-width: 800px; margin: 50px auto 0; background: #fff; padding: 20px;
-            border: 1px solid #ddd; box-shadow: 0 20px 40px rgba(0,0,0,0.08); position: relative;
+        .credentials {
+            padding: 100px 5%;
+            background-color: #ffffff;
         }
+
         .scan-container::before {
             content: "DOKUMENT POŚWIADCZAJĄCY UPRAWNIENIA"; position: absolute;
             top: -30px; left: 0; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted);
@@ -339,6 +339,37 @@
             background-color: #b51c1c;
         }
 
+        .scan-container {
+            max-width: 500px; /* Sztywny limit szerokości karty z dokumentem */
+            margin: 40px auto 0;
+            width: 100%;
+        }
+
+        .scan-card {
+            background: #ffffff;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-bottom: 5px solid var(--primary-red);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .scan-img {
+            width: 100%;
+            height: auto; /* Kluczowe: zachowuje naturalne proporcje A4 bez rozpychania sekcji */
+            display: block;
+            object-fit: contain;
+        }
+
+        /* Wersja mobilna */
+        @media (max-width: 768px) {
+            .scan-container {
+                max-width: 100%;
+            }
+            .scan-card {
+                padding: 8px;
+            }
+        }
+
         /* Responsywność dla urządzeniach mobilnych */
         @media (max-width: 768px) {
             .privacy-content {
@@ -409,8 +440,9 @@
                     [MIEJSCE NA LOGO / GRAFIKĘ]
                 </div>
             </div> -->
+
             <div class="hero-logo-card">
-                <img src="LOGO FIRMY 4K.png" alt="SEFA SAFETY Sebastian Falicki - Rzeczoznawca PPOŻ" class="hero-logo-img">
+                <img src="logo_firmy.webp" alt="SEFA SAFETY Sebastian Falicki - Rzeczoznawca PPOŻ" class="hero-logo-img">
             </div>
         </section>
 
@@ -485,24 +517,24 @@
                 <div class="project-card">
                     <div class="project-image mono">[ZDJĘCIE BUDYNKU 1]</div>
                     <div class="project-info">
-                        <h3>Biurowiec "Omega Tower"</h3>
-                        <p>Kompleksowy audyt budynku wysokościowego wraz z aktualizacją instrukcji bezpieczeństwa pożarowego dla obiektu o powierzchni 15 000 m2.</p>
+                        <h3></h3>
+                        <p></p>
                         <div class="project-services">USŁUGI: Audyt, Instrukcja Bezpieczeństwa</div>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image mono">[ZDJĘCIE BUDYNKU 2]</div>
                     <div class="project-info">
-                        <h3>Hala magazynowa "Logis"</h3>
-                        <p>Opracowanie scenariusza pożarowego oraz matrycy sterowań urządzeń PPOŻ dla wielkopowierzchniowego centrum logistycznego.</p>
+                        <h3></h3>
+                        <p></p>
                         <div class="project-services">USŁUGI: Scenariusz pożarowy, Doradztwo</div>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image mono">[ZDJĘCIE BUDYNKU 3]</div>
                     <div class="project-info">
-                        <h3>Galeria Handlowa "Centrum"</h3>
-                        <p>Uzgodnienie projektu przebudowy układu drogowego i dróg pożarowych wraz z opinią techniczną dotyczącą warunków ewakuacji.</p>
+                        <h3></h3>
+                        <p></p>
                         <div class="project-services">USŁUGI: Uzgodnienia projektowe, Opinia</div>
                     </div>
                 </div>
@@ -517,16 +549,16 @@
             <div class="slider-container">
                 <div class="slider-track" id="sliderTrack">
                     <div class="slide">
-                        <p class="quote">"Pełen profesjonalizm i ogromna wiedza techniczna. Współpraca na etapie projektowania naszego magazynu pozwoliła uniknąć wielu błędów inwestycyjnych. Gorąco polecam!"</p>
-                        <p class="author mono">- Jan Kowalski, Prezes Zarządu Log-Pol</p>
+                        <p class="quote">""</p>
+                        <p class="author mono"></p>
                     </div>
                     <div class="slide">
-                        <p class="quote">"Ekspertyza przeciwpożarowa wykonana terminowo i bardzo rzetelnie. Dokumentacja bez problemu przeszła weryfikację Państwowej Straży Pożarnej."</p>
-                        <p class="author mono">- Anna Nowak, Inwestor Prywatny</p>
+                        <p class="quote">""</p>
+                        <p class="author mono"></p>
                     </div>
                     <div class="slide">
-                        <p class="quote">"Szybki kontakt, elastyczne podejście do klienta i rygor inżynierski, który daje poczucie bezpieczeństwa. Z pewnością wrócimy przy kolejnych projektach."</p>
-                        <p class="author mono">- Piotr Wiśniewski, Architekt Główny</p>
+                        <p class="quote">""</p>
+                        <p class="author mono"></p>
                     </div>
                 </div>
                 <div class="slider-controls">
@@ -553,10 +585,9 @@
         <section id="uprawnienia" class="credentials">
             <h2 class="mono section-label">03 // UPRAWNIENIA ZAWODOWE</h2>
 
-
             <div class="scan-container">
-                <div class="scan-placeholder mono">
-                    [ TUTAJ WSTAW SKAN (JPG/PDF)<br>Proporcje dostosowane do formatu A4 ]
+                <div class="scan-card mono">
+                    <img src="apkt_powolania_sebastian_falicki.webp" alt="Skan Uprawnień Rzeczoznawcy PPOŻ" class="scan-img" loading="lazy">
                 </div>
             </div>
         </section>
@@ -567,19 +598,19 @@
             
             <div class="contact-content">
                 <div class="contact-item">
-                    <a href="mailto:kontakt@twojadomena.pl">kontakt@twojadomena.pl</a>
+                    <a href="mailto:sebastianfalicki@wp.pl">sebastianfalicki@wp.pl</a>
                 </div>
                 <div class="contact-item">
-                    <a href="tel:+48000000000">+48 000 000 000</a>
+                    <a href="tel:+48884304117">+48 884 304 117</a>
                 </div>
             </div>
 
             <div class="footer-note">
                 <div class="mono">
-                    &copy; 2026 [IMIĘ I NAZWISKO] Rzeczoznawca PPOŻ.
+                    &copy; 2026 Sebastian Falicki Rzeczoznawca PPOŻ.
                 </div>
                 <div class="mono">
-                    NIP: [TWÓJ NIP] | REGON: [TWÓJ REGON]
+                    NIP: 1182334999 | REGON: 545482988
                 </div>
             </div>
         </section>
@@ -589,7 +620,7 @@
     <div id="privacy-popup" class="privacy-popup">
         <div class="privacy-content">
             <p class="privacy-text">
-                <strong>Dbamy o Twoją prywatność.</strong> Strona wykorzystuje podstawowe pliki cookies oraz przetwarza dane techniczne (np. adres IP) wyłącznie w celu zapewnienia prawidłowego działania serwisu i obsługi zapytań. Administratorem danych jest [IMIĘ I NAZWISKO / NAZWA FIRMY]. Masz prawo do wglądu i żądania usunięcia swoich danych.
+                <strong>Dbamy o Twoją prywatność.</strong> Strona wykorzystuje tylko podstawowe pliki cookies oraz przetwarza dane techniczne (np. adres IP) wyłącznie w celu zapewnienia prawidłowego działania serwisu i obsługi zapytań. Administratorem danych jest SEFA SAFETY Sebastian Falicki. Masz prawo do wglądu i żądania usunięcia swoich danych.
             </p>
             <button id="privacy-btn" class="privacy-btn mono">Przeczytałem i rozumiem</button>
         </div>
@@ -601,20 +632,20 @@
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "name": "[IMIĘ I NAZWISKO] - Rzeczoznawca PPOŻ",
+      "name": "Sebastian Falicki - Rzeczoznawca PPOŻ",
       "image": "https://twojadomena.pl/logo.jpg",
       "@id": "https://twojadomena.pl",
       "url": "https://twojadomena.pl",
-      "telephone": "+48000000000",
-      "email": "kontakt@twojadomena.pl",
+      "telephone": "+48884304117",
+      "email": "sebastianfalicki@wp.pl",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "[Ulica i numer]",
-        "addressLocality": "[Miasto]",
-        "postalCode": "[Kod pocztowy]",
+        "streetAddress": "ul. Sierakowska, nr 41B",
+        "addressLocality": "Łomianki",
+        "postalCode": "05-092",
         "addressCountry": "PL"
       },
-      "description": "Autoryzowany rzeczoznawca do spraw zabezpieczeń przeciwpożarowych."
+      "description": "Rzeczoznawca do spraw zabezpieczeń przeciwpożarowych."
     }
     </script>
 
