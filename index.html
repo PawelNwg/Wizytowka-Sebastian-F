@@ -220,24 +220,81 @@
             border-top: 1px solid #eaeaea;
             border-bottom: 1px solid #eaeaea;
         }
-        .services-grid {
+        .services-explorer {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.6fr);
+            gap: 50px;
             margin-top: 50px;
+            align-items: stretch;
         }
-        .service-card {
-            border-left: 4px solid var(--primary-red); /* POPRAWKA 2: Czerwone kreseczki */
-            padding: 30px;
+        .service-list {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid #dedede;
+        }
+        .service-tab {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            width: 100%;
+            padding: 17px 12px;
+            border: 0;
+            border-bottom: 1px solid #dedede;
+            border-left: 3px solid transparent;
+            background: transparent;
+            color: var(--text-muted);
+            text-align: left;
+            font: inherit;
+            cursor: pointer;
+            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .service-tab:hover,
+        .service-tab[aria-selected="true"] {
+            color: var(--text-main);
             background: #fff;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
+            border-left-color: var(--primary-red);
         }
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border-left-color: var(--text-main);
+        .service-tab[aria-selected="true"] { font-weight: 700; }
+        .service-tab:focus-visible {
+            outline: 2px solid var(--primary-red);
+            outline-offset: 2px;
+            position: relative;
+            z-index: 1;
         }
-        .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .service-tab-number {
+            color: var(--primary-red);
+            font: 0.75rem 'Space Mono', monospace;
+        }
+        .service-panel {
+            min-height: 430px;
+            padding: clamp(30px, 5vw, 64px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-bottom: 5px solid var(--primary-red);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
+        }
+        .service-panel[hidden] { display: none; }
+        .service-panel-index {
+            margin-bottom: 24px;
+            color: var(--primary-red);
+            font-size: 0.75rem;
+        }
+        .service-panel h3 {
+            max-width: 650px;
+            margin-bottom: 20px;
+            font-size: clamp(1.8rem, 3vw, 2.7rem);
+            line-height: 1.12;
+            letter-spacing: -0.5px;
+        }
+        .service-panel p {
+            max-width: 680px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
 
         /* SEKCJA REALIZACJE (Robocza) */
         .projects { padding: 100px 5%; background-color: #fff; border-bottom: 1px solid #eaeaea; }
@@ -393,6 +450,8 @@
             .hero h1 { font-size: 3.5rem; }
             .about-grid { flex-direction: column; align-items: flex-start; gap: 30px; }
             .about-title { border-left: none; border-top: 4px solid var(--primary-red); padding-left: 0; padding-top: 20px; }
+            .services-explorer { grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.3fr); gap: 28px; }
+            .service-panel { min-height: 390px; padding: 36px; }
         }
 
         @media (max-width: 768px) {
@@ -406,6 +465,16 @@
             .scan-container { margin-top: 40px; }
             .scan-container::before { font-size: 0.7rem; top: -25px; }
             .slide p.quote { font-size: 1.2rem; }
+            .services-explorer { grid-template-columns: 1fr; gap: 24px; }
+            .service-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .service-tab { align-items: flex-start; gap: 9px; min-height: 68px; padding: 13px 10px; font-size: 0.88rem; }
+            .service-panel { min-height: 320px; padding: 28px 24px; }
+            .service-panel-index { margin-bottom: 18px; }
+            .service-panel p { font-size: 1rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .service-tab { transition: none; }
         }
     </style>
 </head>
@@ -464,43 +533,82 @@
         <!-- ZAKRES USŁUG -->
         <section id="uslugi" class="services">
             <h2 class="mono section-label">02 // ZAKRES ŚWIADCZONYCH USŁUG</h2>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Ekspertyzy techniczne</h3>
-                    <p>Analizuję stan ochrony przeciwpożarowej istniejących lub projektowanych obiektów i&nbsp;wskazuję rozwiązania pozwalające spełnić wymagania bezpieczeństwa pożarowego. Ekspertyzy przygotowuję m.in. w sytuacjach wymagających zastosowania rozwiązań innych niż standardowe lub dostosowania istniejącego obiektu do aktualnych wymagań.</p>
+            <div class="services-explorer" data-service-explorer>
+                <div class="service-list" role="tablist" aria-label="Wybierz usługę" aria-orientation="vertical">
+                    <button class="service-tab" id="service-tab-1" type="button" role="tab" aria-selected="true" aria-controls="service-panel-1" tabindex="0">
+                        <span class="service-tab-number">01</span><span>Ekspertyzy techniczne</span>
+                    </button>
+                    <button class="service-tab" id="service-tab-2" type="button" role="tab" aria-selected="false" aria-controls="service-panel-2" tabindex="-1">
+                        <span class="service-tab-number">02</span><span>Uzgodnienia projektowe</span>
+                    </button>
+                    <button class="service-tab" id="service-tab-3" type="button" role="tab" aria-selected="false" aria-controls="service-panel-3" tabindex="-1">
+                        <span class="service-tab-number">03</span><span>Instrukcje bezpieczeństwa pożarowego</span>
+                    </button>
+                    <button class="service-tab" id="service-tab-4" type="button" role="tab" aria-selected="false" aria-controls="service-panel-4" tabindex="-1">
+                        <span class="service-tab-number">04</span><span>Scenariusze pożarowe</span>
+                    </button>
+                    <button class="service-tab" id="service-tab-5" type="button" role="tab" aria-selected="false" aria-controls="service-panel-5" tabindex="-1">
+                        <span class="service-tab-number">05</span><span>Operaty przeciwpożarowe</span>
+                    </button>
+                    <button class="service-tab" id="service-tab-6" type="button" role="tab" aria-selected="false" aria-controls="service-panel-6" tabindex="-1">
+                        <span class="service-tab-number">06</span><span>Dokumentacja ATEX</span>
+                    </button>
+                    <button class="service-tab" id="service-tab-7" type="button" role="tab" aria-selected="false" aria-controls="service-panel-7" tabindex="-1">
+                        <span class="service-tab-number">07</span><span>Audyty i opinie pożarowe</span>
+                    </button>
+                    <button class="service-tab" id="service-tab-8" type="button" role="tab" aria-selected="false" aria-controls="service-panel-8" tabindex="-1">
+                        <span class="service-tab-number">08</span><span>Przygotowanie obiektów do odbioru</span>
+                    </button>
+                    <button class="service-tab" id="service-tab-9" type="button" role="tab" aria-selected="false" aria-controls="service-panel-9" tabindex="-1">
+                        <span class="service-tab-number">09</span><span>Nadzór ppoż. nad inwestycjami</span>
+                    </button>
                 </div>
-                <div class="service-card">
-                    <h3>Uzgodnienia projektowe</h3>
-                    <p>Weryfikuję dokumentację projektową pod kątem wymagań ochrony przeciwpożarowej i&nbsp; uzgadniam przyjęte rozwiązania. Zwracam uwagę nie tylko na zgodność z&nbsp;przepisami, ale również na możliwość ich prawidłowej realizacji na dalszych etapach inwestycji.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Instrukcje bezpieczeństwa pożarowego</h3>
-                    <p>Opracowuję instrukcje bezpieczeństwa pożarowego dopasowane do rzeczywistego sposobu użytkowania obiektu. Dokument określa zasady ochrony przeciwpożarowej, postępowania na wypadek pożaru oraz organizacji bezpiecznej ewakuacji.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Scenariusze pożarowe</h3>
-                    <p>Opracowuję scenariusze określające sposób działania urządzeń i&nbsp;instalacji przeciwpożarowych w przypadku wystąpienia pożaru. Uwzględniam wzajemną współpracę systemów, tak aby przyjęte rozwiązania były spójne z&nbsp;projektem i&nbsp;rzeczywistymi warunkami funkcjonowania obiektu.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Operaty przeciwpożarowe</h3>
-                    <p>Przygotowuję operaty określające wymagania ochrony przeciwpożarowej związane z&nbsp; magazynowaniem, zbieraniem lub przetwarzaniem odpadów. Analizuję charakter prowadzonej działalności oraz występujące zagrożenia, a&nbsp;następnie określam wymagane rozwiązania i&nbsp;warunki bezpiecznego prowadzenia działalności.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Dokumentacja ATEX</h3>
-                    <p>Przygotowuję dokumentację dotyczącą zagrożeń związanych z&nbsp;możliwością wystąpienia atmosfer wybuchowych. Analizuję procesy, stosowane substancje i&nbsp;warunki pracy, pomagając określić strefy zagrożenia oraz wymagane środki ograniczające ryzyko wybuchu.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Audyty i opinie pożarowe</h3>
-                    <p>Sprawdzam stan ochrony przeciwpożarowej obiektu, wskazując niezgodności, potencjalne zagrożenia oraz obszary wymagające poprawy. W&nbsp;zależności od potrzeb przygotowuję opinię lub bardziej szczegółowy audyt wraz z praktycznymi zaleceniami dotyczącymi dalszego postępowania.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Przygotowanie obiektów do odbioru</h3>
-                    <p>Pomagam Inwestorom przygotować obiekt do odbioru pod względem wymagań ochrony przeciwpożarowej. Weryfikuję dokumentację, zastosowane zabezpieczenia oraz zgodność wykonanych rozwiązań z&nbsp;projektem, aby możliwie wcześnie wykryć elementy wymagające uzupełnienia lub poprawy.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Nadzór ppoż. nad inwestycjami</h3>
-                    <p>Wspieram Inwestora podczas realizacji inwestycji, kontrolując wykonanie rozwiązań związanych z&nbsp;ochroną przeciwpożarową. Bieżąca konsultacja pozwala reagować na problemy jeszcze w&nbsp;trakcie budowy i&nbsp;ograniczyć ryzyko kosztownych zmian przed odbiorem obiektu.</p>
+                <div class="service-content" aria-live="polite" aria-atomic="true">
+                    <article class="service-panel" id="service-panel-1" role="tabpanel" aria-labelledby="service-tab-1">
+                        <p class="service-panel-index mono">USŁUGA 01 / 09</p>
+                        <h3>Ekspertyzy techniczne</h3>
+                        <p>Analizuję stan ochrony przeciwpożarowej istniejących lub projektowanych obiektów i&nbsp;wskazuję rozwiązania pozwalające spełnić wymagania bezpieczeństwa pożarowego. Ekspertyzy przygotowuję m.in. w sytuacjach wymagających zastosowania rozwiązań innych niż standardowe lub dostosowania istniejącego obiektu do aktualnych wymagań.</p>
+                    </article>
+                    <article class="service-panel" id="service-panel-2" role="tabpanel" aria-labelledby="service-tab-2" hidden>
+                        <p class="service-panel-index mono">USŁUGA 02 / 09</p>
+                        <h3>Uzgodnienia projektowe</h3>
+                        <p>Weryfikuję dokumentację projektową pod kątem wymagań ochrony przeciwpożarowej i&nbsp;uzgadniam przyjęte rozwiązania. Zwracam uwagę nie tylko na zgodność z&nbsp;przepisami, ale również na możliwość ich prawidłowej realizacji na dalszych etapach inwestycji.</p>
+                    </article>
+                    <article class="service-panel" id="service-panel-3" role="tabpanel" aria-labelledby="service-tab-3" hidden>
+                        <p class="service-panel-index mono">USŁUGA 03 / 09</p>
+                        <h3>Instrukcje bezpieczeństwa pożarowego</h3>
+                        <p>Opracowuję instrukcje bezpieczeństwa pożarowego dopasowane do rzeczywistego sposobu użytkowania obiektu. Dokument określa zasady ochrony przeciwpożarowej, postępowania na wypadek pożaru oraz organizacji bezpiecznej ewakuacji.</p>
+                    </article>
+                    <article class="service-panel" id="service-panel-4" role="tabpanel" aria-labelledby="service-tab-4" hidden>
+                        <p class="service-panel-index mono">USŁUGA 04 / 09</p>
+                        <h3>Scenariusze pożarowe</h3>
+                        <p>Opracowuję scenariusze określające sposób działania urządzeń i&nbsp;instalacji przeciwpożarowych w przypadku wystąpienia pożaru. Uwzględniam wzajemną współpracę systemów, tak aby przyjęte rozwiązania były spójne z&nbsp;projektem i&nbsp;rzeczywistymi warunkami funkcjonowania obiektu.</p>
+                    </article>
+                    <article class="service-panel" id="service-panel-5" role="tabpanel" aria-labelledby="service-tab-5" hidden>
+                        <p class="service-panel-index mono">USŁUGA 05 / 09</p>
+                        <h3>Operaty przeciwpożarowe</h3>
+                        <p>Przygotowuję operaty określające wymagania ochrony przeciwpożarowej związane z&nbsp;magazynowaniem, zbieraniem lub przetwarzaniem odpadów. Analizuję charakter prowadzonej działalności oraz występujące zagrożenia, a&nbsp;następnie określam wymagane rozwiązania i&nbsp;warunki bezpiecznego prowadzenia działalności.</p>
+                    </article>
+                    <article class="service-panel" id="service-panel-6" role="tabpanel" aria-labelledby="service-tab-6" hidden>
+                        <p class="service-panel-index mono">USŁUGA 06 / 09</p>
+                        <h3>Dokumentacja ATEX</h3>
+                        <p>Przygotowuję dokumentację dotyczącą zagrożeń związanych z&nbsp;możliwością wystąpienia atmosfer wybuchowych. Analizuję procesy, stosowane substancje i&nbsp;warunki pracy, pomagając określić strefy zagrożenia oraz wymagane środki ograniczające ryzyko wybuchu.</p>
+                    </article>
+                    <article class="service-panel" id="service-panel-7" role="tabpanel" aria-labelledby="service-tab-7" hidden>
+                        <p class="service-panel-index mono">USŁUGA 07 / 09</p>
+                        <h3>Audyty i opinie pożarowe</h3>
+                        <p>Sprawdzam stan ochrony przeciwpożarowej obiektu, wskazując niezgodności, potencjalne zagrożenia oraz obszary wymagające poprawy. W&nbsp;zależności od potrzeb przygotowuję opinię lub bardziej szczegółowy audyt wraz z praktycznymi zaleceniami dotyczącymi dalszego postępowania.</p>
+                    </article>
+                    <article class="service-panel" id="service-panel-8" role="tabpanel" aria-labelledby="service-tab-8" hidden>
+                        <p class="service-panel-index mono">USŁUGA 08 / 09</p>
+                        <h3>Przygotowanie obiektów do odbioru</h3>
+                        <p>Pomagam Inwestorom przygotować obiekt do odbioru pod względem wymagań ochrony przeciwpożarowej. Weryfikuję dokumentację, zastosowane zabezpieczenia oraz zgodność wykonanych rozwiązań z&nbsp;projektem, aby możliwie wcześnie wykryć elementy wymagające uzupełnienia lub poprawy.</p>
+                    </article>
+                    <article class="service-panel" id="service-panel-9" role="tabpanel" aria-labelledby="service-tab-9" hidden>
+                        <p class="service-panel-index mono">USŁUGA 09 / 09</p>
+                        <h3>Nadzór ppoż. nad inwestycjami</h3>
+                        <p>Wspieram Inwestora podczas realizacji inwestycji, kontrolując wykonanie rozwiązań związanych z&nbsp;ochroną przeciwpożarową. Bieżąca konsultacja pozwala reagować na problemy jeszcze w&nbsp;trakcie budowy i&nbsp;ograniczyć ryzyko kosztownych zmian przed odbiorem obiektu.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -653,6 +761,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const popup = document.getElementById('privacy-popup');
             const btn = document.getElementById('privacy-btn');
+            const serviceExplorer = document.querySelector('[data-service-explorer]');
 
             // Sprawdzanie czy użytkownik już potwierdził zapoznanie się z informacją
             if (!localStorage.getItem('privacyAccepted')) {
@@ -664,6 +773,75 @@
                 localStorage.setItem('privacyAccepted', 'true');
                 popup.style.display = 'none';
             });
+
+            if (serviceExplorer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                const tabs = Array.from(serviceExplorer.querySelectorAll('[role="tab"]'));
+                const panels = tabs.map(function (tab) {
+                    return document.getElementById(tab.getAttribute('aria-controls'));
+                });
+                let activeIndex = 0;
+                let rotationTimer;
+
+                function selectService(index) {
+                    activeIndex = (index + tabs.length) % tabs.length;
+                    tabs.forEach(function (tab, tabIndex) {
+                        const isSelected = tabIndex === activeIndex;
+                        tab.setAttribute('aria-selected', String(isSelected));
+                        tab.tabIndex = isSelected ? 0 : -1;
+                        panels[tabIndex].hidden = !isSelected;
+                    });
+                }
+
+                function stopRotation() {
+                    window.clearInterval(rotationTimer);
+                }
+
+                function startRotation() {
+                    stopRotation();
+                    if (serviceExplorer.matches(':hover') || serviceExplorer.contains(document.activeElement)) {
+                        return;
+                    }
+                    rotationTimer = window.setInterval(function () {
+                        selectService(activeIndex + 1);
+                    }, 6000);
+                }
+
+                tabs.forEach(function (tab, index) {
+                    tab.addEventListener('click', function () {
+                        selectService(index);
+                        startRotation();
+                    });
+
+                    tab.addEventListener('keydown', function (event) {
+                        let nextIndex = index;
+                        if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+                            nextIndex = (index + 1) % tabs.length;
+                        } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+                            nextIndex = (index - 1 + tabs.length) % tabs.length;
+                        } else if (event.key === 'Home') {
+                            nextIndex = 0;
+                        } else if (event.key === 'End') {
+                            nextIndex = tabs.length - 1;
+                        } else {
+                            return;
+                        }
+                        event.preventDefault();
+                        selectService(nextIndex);
+                        tabs[nextIndex].focus();
+                        startRotation();
+                    });
+                });
+
+                serviceExplorer.addEventListener('mouseenter', stopRotation);
+                serviceExplorer.addEventListener('mouseleave', startRotation);
+                serviceExplorer.addEventListener('focusin', stopRotation);
+                serviceExplorer.addEventListener('focusout', function (event) {
+                    if (!serviceExplorer.contains(event.relatedTarget)) {
+                        startRotation();
+                    }
+                });
+                startRotation();
+            }
         });
     </script>
 </body>
